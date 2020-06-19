@@ -5,6 +5,7 @@ import Favorites from './components/Favorites'
 // import Dog from './components/Dog'
 
 function App() {
+  const [dogBreeds, updateDogBreeds] = useState([])
 
   useEffect(() => {
     fetch(
@@ -15,41 +16,29 @@ function App() {
     )
       .then(res => res.json())
       .then(response => {
+        updateDogBreeds(Object.keys(response.message))
         console.log(response)
       })
       .catch(error => console.log(error));
   }, []);
 
-  const [inputValue, updateInputValue] = useState('')
-  const [breedPhotos, updateBreedPhotos] = useState([])
-  const [favorites, updateFavorites] = useState([])
+  const [selectValue, updateSelectValue] = useState('')
+  const [favorites, updateFavorites] = useState([
+  ])
 
 
-  const handleInputChange = (e) => {
-      updateInputValue(e.target.value)
-  }
-
-  const searchHandler = (e) => {
-      e.preventDefault()
-      console.log(inputValue)
-      fetch(
-      `https://dog.ceo/api/breed/${inputValue}/images`,
+  const handleSelectChange = (e) => {
+    console.warn(e)
+    fetch(
+      `https://dog.ceo/api/breed/${e}/images`,
       {
-          method: "GET",
+        method: "GET"
       }
-      )
-      .then(res => res.json())
-      .then(response => {
-          updateBreedPhotos(response.message)
-          console.log(response)
-
-      })
-      .catch(error => console.log(error));
+    )
+    .then(console.log(e))
+    .then(res => res.json())
+    .then(res => updateFavorites( [...favorites, {[e]: res.message[0]}] ))
   }
-
-  const addHandler = (img) => {
-    updateFavorites([...favorites, img])
-}
 
   const removeHandler = (img) => {
     const newFavorites = [...favorites]
@@ -61,11 +50,11 @@ function App() {
     <div className="App" style={{padding: "2rem 4rem"}}>
       <p>Hey</p>
       <Search
-        inputValue={inputValue} 
-        handleInputChange={handleInputChange} 
-        searchHandler={searchHandler}
+        dogBreeds={dogBreeds}
+        selectValue={selectValue}
+        handleSelectChange={handleSelectChange} 
+        updateSelectValue={updateSelectValue}
       />
-      <DogArea breedPhotos={breedPhotos} addHandler={addHandler} />
       <Favorites favorites={favorites} removeHandler={removeHandler} />
     </div>
   );

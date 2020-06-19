@@ -1,6 +1,5 @@
 import React from 'react';
 import Dog from './Dog'
-import styled from 'styled-components'
 
 const Favorites = ({favorites, removeHandler}) => {
     console.log('favorites');
@@ -9,14 +8,14 @@ const Favorites = ({favorites, removeHandler}) => {
         <div>
             <h2>Favorites</h2>
             {favorites && 
-                favorites.map((favorite, index) => {
+                favorites.map( (favorite, index) => {
                     return (
                         <Dog
+                            key={index}
                             index={index}
-                            img={favorite} 
-                            alt={favorite} 
-                            removeHandler={removeHandler} 
-                            isFavorite={true} 
+                            img={Object.values(favorite)} 
+                            breed={Object.keys(favorite)} 
+                            removeHandler={removeHandler}
                         />
                     )
                 })

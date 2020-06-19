@@ -20,19 +20,17 @@ const DogImg = styled.img`
     `}
 `
 
-const Dog = ({ img, alt, index, addHandler, removeHandler, isFavorite }) => {
+const Dog = ({ breed, img, alt, index, removeHandler }) => {
     return (
         <StlyedDog>
+            <p>{breed}</p>
             <DogImg 
                 src={img} 
                 alt={alt} 
-                // selected={selected}
             />
             <Button 
-                addHandler={addHandler} 
                 removeHandler={removeHandler} 
                 img={img} 
-                isFavorite={isFavorite}
                 index={index} 
             />
         </StlyedDog>

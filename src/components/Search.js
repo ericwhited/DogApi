@@ -1,11 +1,21 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-const Search = ({ handleInputChange, searchHandler, inputValue }) => {
+const Search = ({ handleSelectChange, selectValue, dogBreeds }) => {
+        console.log(dogBreeds);
+        console.log('dogBreeds');
         return (
         <div style={{marginBottom: "100px"}}>
-        <label style={{display: "block"}} for="search-dogs">Search Dogs</label>
-            <input id="search-dogs" value={inputValue} onChange={e => handleInputChange(e)} type="text" />
-            <button onClick={e => searchHandler(e)}>Search</button>
+            <label style={{display: "block"}} for="dog-breeds">Search Dogs</label>
+            <select
+                value={selectValue}
+                onChange={(event) => handleSelectChange(event.target.value)} 
+                name="Dog Breeds" 
+                id="dog-breeds"
+            >
+                    {dogBreeds && 
+                        dogBreeds.map(dog => <option value={dog}>{dog}</option>)
+                    }
+            </select>
         </div>
     )
 }
