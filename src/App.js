@@ -28,6 +28,7 @@ function App() {
 
 
   const handleSelectChange = (e) => {
+    updateSelectValue(e)
     console.warn(e)
     fetch(
       `https://dog.ceo/api/breed/${e}/images`,
