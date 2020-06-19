@@ -29,14 +29,12 @@ function App() {
 
   const handleSelectChange = (e) => {
     updateSelectValue(e)
-    console.warn(e)
     fetch(
       `https://dog.ceo/api/breed/${e}/images`,
       {
         method: "GET"
       }
     )
-    .then(console.log(e))
     .then(res => res.json())
     .then(res => updateFavorites( [...favorites, {[e]: res.message[0]}] ))
   }

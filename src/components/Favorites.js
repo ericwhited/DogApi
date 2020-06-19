@@ -2,8 +2,6 @@ import React from 'react';
 import Dog from './Dog'
 
 const Favorites = ({favorites, removeHandler}) => {
-    console.log('favorites');
-
     return (
         <div>
             <h2>Favorites</h2>
